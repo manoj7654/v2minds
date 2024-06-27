@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="containar">
+        <div id="nav-path">
+            <button id="back-button" class="hidden">Back</button>
+            <!-- path should show like this: home > folder's name > subfolder's name -->
+            <button class="path-segment" onclick="renderFolder('/')" data-path="/">Home</button> 
+            <span id="current-path"></span>
+        </div>
+        <div id="nav-2">
+            <button class="btn">Archive Cleanup</button>
+            <button class="btn">Search</button>
+            <button class="btn">Create new</button>
+        </div>
+        <div id="division-1">
+            <table id="division1-table">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="select-all"> File/Folder name</th>
+                        <th>Size</th>
+                        <th>Date modified</th>
+                    </tr>
+                </thead>
+                <tbody id="file-list">
+                    <tr>
+                        <td><input type="checkbox" class="file-checkbox" data-name="Music"> <span class="folder" data-path="/Music">Music</span></td>
+                        <td>---</td>
+                        <td>2024/01/01 10:00:00 AM</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" class="file-checkbox" data-name="Photos"> <span class="folder" data-path="/Photos">Photos</span></td>
+                        <td>---</td>
+                        <td>2024/01/01 10:00:00 AM</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" class="file-checkbox" data-name="Documents"> <span class="folder" data-path="/Documents">Documents</span></td>
+                        <td>---</td>
+                        <td>2024/01/01 10:00:00 AM</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" class="file-checkbox" data-name="Shared"> <span class="folder" data-path="/Shared">Shared</span></td>
+                        <td>---</td>
+                        <td>2024/01/01 10:00:00 AM</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="division-2">
+            <div id="divisioin-2-nav">
+                <label>Backupbox</label>
+                <button id="remove-button" class="hidden">Remove</button>
+            </div>
+            <div id="cloned-items"></div>
+        </div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>

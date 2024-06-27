@@ -1,0 +1,90 @@
+#nav-path button {
+    margin-right: 5px;
+}
+#nav-path {
+    background-color: cadetblue;
+    padding: 10px;
+    border-radius: 8px;
+}
+.hidden {
+    display: none;
+}
+#division-2 .item {
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+}
+#division-2 .item input {
+    margin-right: 10px;
+}
+.folder, .file {
+    cursor: pointer;
+}
+#containar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+#nav-path, #nav-2 {
+    border: 1mm solid lightskyblue;
+    width: 700px;
+    border-radius: 8px;
+}
+#nav-2 {
+    display: flex;
+    justify-content: flex-end;
+    background-color: lightskyblue;
+    padding: 10px;
+    border-radius: 8px;
+}
+th {
+    background-color: lightskyblue;
+}
+#division-1, #division-2 {
+    border: 1mm solid lightskyblue;
+    width: 700px;
+    height: 200px;
+    border-radius: 8px;
+    padding: 10px;
+    overflow-y: auto;
+}
+#divisioin-2-nav {
+    display: flex;
+    background: lightskyblue;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 8px;
+}
+#divisioin-2-nav label {
+    font-size: 20px;
+    margin-left: 5px;
+}
+#division1-table th,
+#division1-table td {
+    padding: 8px;
+    text-align: left;
+}
+#remove-button {
+    margin-bottom: 10px;
+    margin-right: 5px;
+}
+button {
+    margin: 10px;
+    background-color: #949494;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #787878;
+}
