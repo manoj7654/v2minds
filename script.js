@@ -8,28 +8,47 @@ const pathDisplay = document.getElementById('current-path');
 
 const directoryStructure = {
     '/': [
-        { name: 'Music', type: 'folder', path: '/Music' },
-        { name: 'Photos', type: 'folder', path: '/Photos' },
-        { name: 'Documents', type: 'folder', path: '/Documents' },
-        { name: 'Shared', type: 'folder', path: '/Shared' }
-    ],
-    '/Music': [
-        { name: 'song1.mp3', type: 'file', path: '/Music/song1.mp3' },
-        { name: 'song2.mp3', type: 'file', path: '/Music/song2.mp3' }
-    ],
-    '/Photos': [
-        { name: 'vacation.jpg', type: 'file', path: '/Photos/vacation.jpg' },
-        { name: 'birthday.jpg', type: 'file', path: '/Photos/birthday.jpg' }
-    ],
-    '/Documents': [
-        { name: 'resume.pdf', type: 'file', path: '/Documents/resume.pdf' },
-        { name: 'content', type: 'folder', path: '/Documents/content' },
-        { name: 'cover_letter.docx', type: 'file', path: '/Documents/cover_letter.docx' }
-    ],
-    '/Shared': [
-        { name: 'report.xlsx', type: 'file', path: '/Shared/report.xlsx' },
-        { name: 'presentation.pptx', type: 'file', path: '/Shared/presentation.pptx' }
-    ]
+                { name: 'Music', type: 'folder', path: '/Music' },
+                { name: 'Photos', type: 'folder', path: '/Photos' },
+                { name: 'Documents', type: 'folder', path: '/Documents' },
+                { name: 'Shared', type: 'folder', path: '/Shared' },
+                { name: 'Videos', type: 'folder', path: '/Videos' },
+                { name: 'Downloads', type: 'folder', path: '/Downloads' }
+            ],
+            '/Music': [
+                { name: 'song1.mp3', type: 'file', path: '/Music/song1.mp3' },
+                { name: 'song2.mp3', type: 'file', path: '/Music/song2.mp3' }
+            ],
+            '/Photos': [
+                { name: 'vacation.jpg', type: 'file', path: '/Photos/vacation.jpg' },
+                { name: 'birthday.jpg', type: 'file', path: '/Photos/birthday.jpg' }
+            ],
+            '/Documents': [
+                { name: 'resume.pdf', type: 'file', path: '/Documents/resume.pdf' },
+                { name: 'content', type: 'folder', path: '/Documents/content' },
+                { name: 'cover_letter.docx', type: 'file', path: '/Documents/cover_letter.docx' },
+                { name: 'project', type: 'folder', path: '/Documents/project' }
+            ],
+            '/Documents/content': [
+                { name: 'chapter1.docx', type: 'file', path: '/Documents/content/chapter1.docx' },
+                { name: 'chapter2.docx', type: 'file', path: '/Documents/content/chapter2.docx' }
+            ],
+            '/Documents/project': [
+                { name: 'specification.pdf', type: 'file', path: '/Documents/project/specification.pdf' },
+                { name: 'budget.xlsx', type: 'file', path: '/Documents/project/budget.xlsx' }
+            ],
+            '/Shared': [
+                { name: 'report.xlsx', type: 'file', path: '/Shared/report.xlsx' },
+                { name: 'presentation.pptx', type: 'file', path: '/Shared/presentation.pptx' }
+            ],
+            '/Videos': [
+                { name: 'movie.mp4', type: 'file', path: '/Videos/movie.mp4' },
+                { name: 'clip.mp4', type: 'file', path: '/Videos/clip.mp4' }
+            ],
+            '/Downloads': [
+                { name: 'setup.exe', type: 'file', path: '/Downloads/setup.exe' },
+                { name: 'ebook.pdf', type: 'file', path: '/Downloads/ebook.pdf' }
+            ]
 };
 
 let currentDirectory = '/';
@@ -124,8 +143,6 @@ function refreshState() {
 
     refreshClonedItems();
 }
-
-// Function to refresh cloned items in the backup box
 function refreshClonedItems() {
     cloneContainer.innerHTML = '';
     const checkedItems = [...document.querySelectorAll('.file-checkbox')].filter(checkbox => checkbox.checked);
@@ -133,34 +150,31 @@ function refreshClonedItems() {
     checkedItems.forEach(item => {
         const div = document.createElement('div');
         div.classList.add('item');
-        div.innerHTML = `<input type="checkbox" data-name="${item.dataset.name}" class="cloned-checkbox"> ${item.dataset.name}`;
+        div.innerHTML = `<input type="checkbox" data-name="${item.dataset.name}" class="cloned-checkbox" > ${item.dataset.name}`;
         cloneContainer.appendChild(div);
     });
 
     removeBtn.classList.toggle('hidden', checkedItems.length === 0);
 
     const clonedCheckboxes = document.querySelectorAll('.cloned-checkbox');
-    clonedCheckboxes.forEach(checkbox => {
+    clonedCheckboxes.forEach((checkbox,id) => {
         checkbox.addEventListener('change', function() {
+            checkbox.checked=checked;
+
             const originalCheckbox = document.querySelector(`.file-checkbox[data-name="${checkbox.dataset.name}"]`);
-            if (originalCheckbox) {
-                originalCheckbox.checked = checkbox.checked;
-                refreshState();
-            }
+            originalCheckbox.checked = checkbox.checked;
+            updateState();
         });
     });
 }
 
 // Event listener for remove button
 removeBtn.addEventListener('click', function() {
-    const clonedCheckboxes = document.querySelectorAll('.cloned-checkbox');
+    const clonedCheckboxes = document.querySelectorAll('.cloned-checkbox:checked');
     clonedCheckboxes.forEach(checkbox => {
-        if (checkbox.checked) {
-            const originalCheckbox = document.querySelector(`.file-checkbox[data-name="${checkbox.dataset.name}"]`);
-            if (originalCheckbox) {
-                originalCheckbox.checked = false;
-            }
-            checkbox.closest('.item').remove();
+        const originalCheckbox = document.querySelector(`.file-checkbox[data-name="${checkbox.dataset.name}"]`);
+        if (originalCheckbox) {
+            originalCheckbox.checked = false;
         }
     });
     refreshState();
